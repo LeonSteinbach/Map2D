@@ -28,4 +28,17 @@
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="res\fonts\" />
+    <Folder Include="res\music\" />
+    <Folder Include="res\sounds\" />
+    <Folder Include="res\shaders\" />
+    <Folder Include="res\textures\" />
+    <Folder Include="src\audio\" />
+    <Folder Include="src\core\states\" />
+    <Folder Include="src\graphics\gui\" />
+    <Folder Include="src\input\" />
+    <Folder Include="src\physics\" />
+    <Folder Include="src\world\" />
+  </ItemGroup>
 </Project>
