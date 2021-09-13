@@ -37,7 +37,6 @@
     <Folder Include="src\audio\" />
     <Folder Include="src\core\states\" />
     <Folder Include="src\graphics\gui\" />
-    <Folder Include="src\input\" />
     <Folder Include="src\physics\" />
     <Folder Include="src\world\" />
   </ItemGroup>
