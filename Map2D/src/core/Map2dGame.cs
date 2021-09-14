@@ -1,4 +1,7 @@
+using System;
+using System.Diagnostics;
 using Map2D.assets;
+using Map2D.core.states;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -49,24 +52,23 @@ namespace Map2D.core
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             Assets.Initialize(Content);
+
+            // Load main state
+            StateManager.Start(new MainState());
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // Handle exit press
+            StateManager.Update(gameTime);
             
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-            
-            spriteBatch.Begin();
-            
-            
+	        GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.End();
+            StateManager.Render(spriteBatch);
             
             base.Draw(gameTime);
         }
