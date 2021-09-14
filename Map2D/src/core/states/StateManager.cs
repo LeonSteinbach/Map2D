@@ -1,4 +1,5 @@
 ﻿using System;
+using Map2D.input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -37,6 +38,7 @@ namespace Map2D.core.states
 		public static void Update(GameTime gameTime)
 		{
 			currentState.Update(gameTime);
+			Input.Update();
 		}
 
 		public static void Render(SpriteBatch spriteBatch)

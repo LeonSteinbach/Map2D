@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using Map2D.assets;
+using Map2D.audio;
 using Map2D.core.states;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -52,8 +53,8 @@ namespace Map2D.core
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             Assets.Initialize(Content);
-
-            // Load main state
+            AudioManager.Initialize();
+            
             StateManager.Start(new MainState());
         }
 
