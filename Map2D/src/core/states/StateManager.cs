@@ -15,8 +15,6 @@ namespace Map2D.core.states
 			currentState = state;
 			currentState.lastState = temp;
 
-			Console.WriteLine("start");
-
 			currentState.Start();
 		}
 
