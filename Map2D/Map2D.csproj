@@ -34,7 +34,6 @@
     <Folder Include="res\sounds\" />
     <Folder Include="res\shaders\" />
     <Folder Include="res\textures\" />
-    <Folder Include="src\graphics\gui\" />
     <Folder Include="src\physics\" />
     <Folder Include="src\world\" />
   </ItemGroup>
