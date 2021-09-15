@@ -1,5 +1,4 @@
-﻿using System;
-using Map2D.input;
+﻿using Map2D.input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

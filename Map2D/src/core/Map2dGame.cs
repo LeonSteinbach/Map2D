@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics;
 using Map2D.assets;
 using Map2D.audio;
 using Map2D.core.states;

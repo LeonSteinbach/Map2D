@@ -8,8 +8,8 @@ namespace Map2D
 		[STAThread]
 		static void Main()
 		{
-			using (var game = new Map2dGame())
-				game.Run();
+			Map2dGame game = new Map2dGame();
+			game.Run();
 		}
 	}
 }

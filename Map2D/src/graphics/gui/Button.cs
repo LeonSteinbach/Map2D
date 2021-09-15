@@ -1,9 +1,7 @@
-﻿using System;
-using Map2D.assets;
+﻿using Map2D.assets;
 using Map2D.audio;
 using Map2D.input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Map2D.graphics.gui
