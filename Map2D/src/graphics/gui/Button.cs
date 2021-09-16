@@ -99,10 +99,15 @@ namespace Map2D.graphics.gui
 				AudioManager.PlaySound(clickSound);
 		}
 
-		public void Render(SpriteBatch spriteBatch)
+		protected void RenderBase(SpriteBatch spriteBatch)
 		{
 			spriteBatch.Draw(RenderTexture, RenderRectangle.Location.ToVector2() + new Vector2(0, RenderOffset), null, Color.White,
 				RenderAngle, RenderRectangle.Center.ToVector2(), RenderScale, SpriteEffects.None, layer);
+		}
+
+		public void Render(SpriteBatch spriteBatch)
+		{
+			RenderBase(spriteBatch);
 
 			if (string.IsNullOrEmpty(text) || font == null) return;
 			Vector2 textPosition = RenderRectangle.Center.ToVector2() + new Vector2(0, RenderOffset) - FontHelper.TextSize(font, text) / 2f;

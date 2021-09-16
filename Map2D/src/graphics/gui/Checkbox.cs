@@ -51,7 +51,7 @@ namespace Map2D.graphics.gui
 
 		public new void Render(SpriteBatch spriteBatch)
 		{
-			base.Render(spriteBatch);
+			RenderBase(spriteBatch);
 
 			if (string.IsNullOrEmpty(text) || font == null) return;
 
