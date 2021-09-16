@@ -8,44 +8,59 @@ namespace Map2D.graphics.gui
 {
 	public class Button
 	{
-		private Texture2D defaultTexture, hoverTexture;
-		private string hoverSound, clickSound;
-		private string text;
-		private SpriteFont font;
-		private Color textColor;
-		private Rectangle rectangle;
-		private int hoverOffset;
-		private float hoverScale;
-		private float hoverAngle;
-		private float layer;
+		protected Texture2D defaultTexture, hoverTexture;
+		protected string hoverSound, clickSound;
+		protected Rectangle rectangle;
+		protected int hoverOffset;
+		protected float hoverScale;
+		protected float hoverAngle;
+		protected float layer;
 
-		public Button(Texture2D texture, Vector2 position, bool centered = true, float layer = 1f) :
-			this(texture, texture, position, centered, null, null, string.Empty, null, Color.Black, 0, 1f, 0f, layer)
+		protected readonly string text;
+		protected readonly SpriteFont font;
+		protected readonly Color color;
+
+		protected int RenderOffset => Hover() ? hoverOffset : 0;
+		protected float RenderScale => Hover() ? hoverScale : 1f;
+		protected float RenderAngle => Hover() ? hoverAngle : 0f;
+		protected Texture2D RenderTexture => Hover() ? hoverTexture : defaultTexture;
+		protected Rectangle RenderRectangle => Hover() ? rectangle :
+			new Rectangle(rectangle.X, rectangle.Y + hoverOffset, rectangle.Width, rectangle.Height);
+
+		public Rectangle Rectangle => rectangle;
+
+		public Button(Texture2D texture, Vector2 position, 
+			bool centered = true, float layer = 1f) :
+			this(texture, texture, position, centered, null, null, 
+				string.Empty, null, Color.Black, 0, 1f, 0f, layer)
 		{
 
 		}
 
-		public Button(Texture2D defaultTexture, Texture2D hoverTexture, Vector2 position, bool centered = true, float layer = 1f) :
-			this(defaultTexture, hoverTexture, position, centered, null, null, string.Empty, null, Color.Black, 0, 1f, 0f, layer)
+		public Button(Texture2D defaultTexture, Texture2D hoverTexture, 
+			Vector2 position, bool centered = true, float layer = 1f) :
+			this(defaultTexture, hoverTexture, position, centered, null, null, 
+				string.Empty, null, Color.Black, 0, 1f, 0f, layer)
 		{
 			
 		}
 
-		public Button(Texture2D defaultTexture, Texture2D hoverTexture, Vector2 position, bool centered, 
-			string hoverSound, string clickSound, string text, SpriteFont font, Color textColor,
-			int hoverOffset, float hoverScale, float hoverAngle, float layer = 1f)
+		public Button(Texture2D defaultTexture, Texture2D hoverTexture, 
+			Vector2 position, bool centered, string hoverSound, string clickSound, 
+			string text, SpriteFont font, Color color, int hoverOffset, 
+			float hoverScale, float hoverAngle, float layer = 1f)
 		{
 			this.defaultTexture = defaultTexture;
 			this.hoverTexture = hoverTexture;
 			this.hoverSound = hoverSound;
 			this.clickSound = clickSound;
-			this.text = text;
-			this.font = font;
-			this.textColor = textColor;
 			this.hoverOffset = hoverOffset;
 			this.hoverScale = hoverScale;
 			this.hoverAngle = hoverAngle;
 			this.layer = layer;
+			this.text = text;
+			this.font = font;
+			this.color = color;
 
 			if (centered) {
 				position.X -= defaultTexture.Width / 2f;
@@ -63,10 +78,7 @@ namespace Map2D.graphics.gui
 
 		public bool Entered()
 		{
-			bool entered = Hover() && !rectangle.Contains(Input.PreviousMousePosition());
-			if (entered)
-				AudioManager.PlaySound(hoverSound);
-			return entered;
+			return Hover() && !rectangle.Contains(Input.PreviousMousePosition());
 		}
 
 		public bool Left()
@@ -76,32 +88,26 @@ namespace Map2D.graphics.gui
 
 		public bool Pressed()
 		{
-			bool pressed = Hover() && Input.IsLeftPressed();
-			if (pressed)
+			return Hover() && Input.IsLeftPressed();
+		}
+
+		public void UpdateSounds()
+		{
+			if (Entered())
+				AudioManager.PlaySound(hoverSound);
+			if (Pressed())
 				AudioManager.PlaySound(clickSound);
-			return pressed;
 		}
 
 		public void Render(SpriteBatch spriteBatch)
 		{
-			Texture2D renderTexture = defaultTexture;
-			Rectangle renderRectangle = rectangle;
-			float renderAngle = hoverAngle;
-			float renderScale = hoverScale;
+			spriteBatch.Draw(RenderTexture, RenderRectangle.Location.ToVector2() + new Vector2(0, RenderOffset), null, Color.White,
+				RenderAngle, RenderRectangle.Center.ToVector2(), RenderScale, SpriteEffects.None, layer);
 
-			if (Hover()) {
-				renderTexture = hoverTexture;
-				renderRectangle.Y += hoverOffset;
-			}
-
-			spriteBatch.Draw(renderTexture, renderRectangle.Location.ToVector2(), null, Color.White, 
-				hoverAngle, renderRectangle.Center.ToVector2(), renderScale, SpriteEffects.None, layer);
-
-			if (string.IsNullOrEmpty(text) && font != null) {
-				Vector2 textPosition = renderRectangle.Center.ToVector2() - FontHelper.TextSize(font, text) / 2f;
-				spriteBatch.DrawString(font, text, textPosition, textColor, renderAngle, 
-					renderRectangle.Center.ToVector2(), renderScale, SpriteEffects.None, layer);
-			}
+			if (string.IsNullOrEmpty(text) || font == null) return;
+			Vector2 textPosition = RenderRectangle.Center.ToVector2() + new Vector2(0, RenderOffset) - FontHelper.TextSize(font, text) / 2f;
+			spriteBatch.DrawString(font, text, textPosition, color, RenderAngle, 
+				RenderRectangle.Center.ToVector2(), RenderScale, SpriteEffects.None, layer);
 		}
 	}
 }
