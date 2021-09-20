@@ -9,7 +9,8 @@ namespace Map2D.graphics
 		private readonly int columns;
 		private readonly int frameWidth, frameHeight;
 		private int currentFrame, frames;
-		private int delay, elapsed;
+		private int delay;
+		private double elapsed;
 
 		public bool Playing { get; private set; }
 		public bool Looping { get; set; }
@@ -27,7 +28,7 @@ namespace Map2D.graphics
 			frameHeight = texture.Height / rows;
 			
 			currentFrame = 0;
-			elapsed = 0;
+			elapsed = 0d;
 
 			Looping = looping;
 			Flipped = flipped;
@@ -83,7 +84,19 @@ namespace Map2D.graphics
 			spriteBatch.Draw(texture, position, SourceRectangle, Color.White, 
 				rotation, Vector2.Zero, scale, effect, layer);
 
-			elapsed += 
+			elapsed += gameTime.ElapsedGameTime.TotalMilliseconds;
+			if (elapsed >= delay) {
+				if (currentFrame >= frames - 1) {
+					if (Looping)
+						currentFrame = 0;
+					else
+						Stop();
+				} else {
+					currentFrame++;
+				}
+
+				elapsed = 0d;
+			}
 		}
 	}
 }
