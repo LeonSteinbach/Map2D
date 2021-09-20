@@ -1,6 +1,7 @@
 using Map2D.assets;
 using Map2D.audio;
 using Map2D.core.states;
+using Map2D.util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -59,6 +60,7 @@ namespace Map2D.core
         protected override void Update(GameTime gameTime)
         {
             StateManager.Update(gameTime);
+            TimeHelper.Update((float) gameTime.ElapsedGameTime.TotalSeconds);
             
             base.Update(gameTime);
         }
