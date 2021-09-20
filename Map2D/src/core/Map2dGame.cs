@@ -69,7 +69,7 @@ namespace Map2D.core
         {
 	        GraphicsDevice.Clear(Color.Black);
 
-            StateManager.Render(spriteBatch);
+            StateManager.Render(gameTime, spriteBatch);
             
             base.Draw(gameTime);
         }
