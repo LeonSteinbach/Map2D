@@ -30,7 +30,7 @@ namespace Map2D.core.states
 
 		}
 
-		public override void Render(SpriteBatch spriteBatch)
+		public override void Render(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();
 

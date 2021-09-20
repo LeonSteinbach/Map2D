@@ -38,9 +38,9 @@ namespace Map2D.core.states
 			Input.Update();
 		}
 
-		public static void Render(SpriteBatch spriteBatch)
+		public static void Render(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			currentState.Render(spriteBatch);
+			currentState.Render(gameTime, spriteBatch);
 		}
 	}
 }

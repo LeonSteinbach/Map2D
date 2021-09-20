@@ -24,7 +24,7 @@ namespace Map2D.core.states
 		public abstract void LoadContent();
 		public abstract void Dispose();
 		public abstract void Update(GameTime gameTime);
-		public abstract void Render(SpriteBatch spriteBatch);
+		public abstract void Render(GameTime gameTime, SpriteBatch spriteBatch);
 
 		public void Start()
 		{
