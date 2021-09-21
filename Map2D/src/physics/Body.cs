@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Map2D.physics
 {
-	public abstract class Body
+	public class Body
 	{
 		public Vector2 Position { get; set; }
 		public Vector2 Velocity { get; set; }
@@ -20,7 +20,7 @@ namespace Map2D.physics
 
 		public GeometricObject BoundingBox { get; set; }
 
-		protected Body()
+		public Body()
 		{
 
 		}
