@@ -34,7 +34,7 @@ namespace Map2D.graphics.shapes
                 Vector2.Zero, new Vector2(line.Length(), thickness), SpriteEffects.None, layer);
         }
 
-        private static void DrawLines(SpriteBatch spriteBatch, GeometricObject geometricObject,
+        public static void DrawLines(SpriteBatch spriteBatch, GeometricObject geometricObject,
             Color color, float thickness, float layer = 1.0f)
         {
             foreach (Line line in geometricObject.sides)
