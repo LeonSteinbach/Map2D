@@ -1,5 +1,7 @@
-﻿using Map2D.math.geometry;
+﻿using Map2D.graphics.shapes;
+using Map2D.math.geometry;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Map2D.physics
 {
@@ -8,11 +10,37 @@ namespace Map2D.physics
 		public Vector2 Position { get; set; }
 		public Vector2 Velocity { get; set; }
 		public Vector2 Acceleration { get; set; }
-		public Vector2 Rotation { get; set; }
+
+		public float Rotation { get; set; }
+		public float RotationVelocity { get; set; }
+		public float RotationAcceleration { get; set; }
+
+		public bool FixedPosition { get; set; }
+		public bool FixedRotation { get; set; }
+
 		public GeometricObject BoundingBox { get; set; }
 
-		// TODO: Update, RenderBoundingBox (debug), forces, center of mass (in math)
-		// TODO: Add body types (static, dynamic, rotatable)
-		// TODO: Add world structure (list of bodies)
+		protected Body()
+		{
+
+		}
+
+		public void Update(GameTime gameTime)
+		{
+			if (!FixedPosition) {
+				Velocity += Acceleration * gameTime.ElapsedGameTime.Milliseconds;
+				Position += Velocity * gameTime.ElapsedGameTime.Milliseconds;
+			}
+
+			if (!FixedRotation) {
+				RotationVelocity += RotationAcceleration * gameTime.ElapsedGameTime.Milliseconds;
+				Rotation += RotationAcceleration * gameTime.ElapsedGameTime.Milliseconds;
+			}
+		}
+
+		public void RenderDebug(SpriteBatch spriteBatch, Color color, float thickness)
+		{
+			Shapes.DrawLines(spriteBatch, BoundingBox, color, thickness);
+		}
 	}
 }
