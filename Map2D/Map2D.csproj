@@ -1,14 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <StartupObject>Map2D.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
