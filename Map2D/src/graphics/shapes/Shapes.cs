@@ -9,13 +9,13 @@ namespace Map2D.graphics.shapes
     public class Shapes
     {
         private static Texture2D pixel;
-        
+
         private static void CreatePixel(GraphicsResource spriteBatch)
         {
             pixel = new Texture2D(spriteBatch.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             pixel.SetData(new[] { Color.White });
         }
-        
+
         public static void DrawPixel(SpriteBatch spriteBatch, Vector2 position, Color color)
         {
             if (pixel == null)
@@ -24,13 +24,13 @@ namespace Map2D.graphics.shapes
             spriteBatch.Draw(pixel, position, color);
         }
 
-        public static void DrawLine(SpriteBatch spriteBatch, Line line, 
+        public static void DrawLine(SpriteBatch spriteBatch, Line line,
             Color color, float thickness, float layer = 1.0f)
         {
             if (pixel == null)
                 CreatePixel(spriteBatch);
 
-            spriteBatch.Draw(pixel, line.a.ToVector2(), null, color, line.Angle(), 
+            spriteBatch.Draw(pixel, line.a.ToVector2(), null, color, line.Angle(),
                 Vector2.Zero, new Vector2(line.Length(), thickness), SpriteEffects.None, layer);
         }
 
@@ -47,14 +47,14 @@ namespace Map2D.graphics.shapes
             DrawLines(spriteBatch, rectangle, color, thickness, layer);
         }
 
-        public static void DrawFilledRectangle(SpriteBatch spriteBatch, math.geometry.Rectangle rectangle, 
+        public static void DrawFilledRectangle(SpriteBatch spriteBatch, math.geometry.Rectangle rectangle,
             Color color, float angle, float layer = 1.0f)
         {
             if (pixel == null)
                 CreatePixel(spriteBatch);
 
             spriteBatch.Draw(pixel, new Microsoft.Xna.Framework.Rectangle(
-                    rectangle.left, rectangle.top, rectangle.width, rectangle.height), 
+                    rectangle.left, rectangle.top, rectangle.width, rectangle.height),
                 null, color, angle, Vector2.Zero, SpriteEffects.None, layer);
         }
 
@@ -68,29 +68,29 @@ namespace Map2D.graphics.shapes
         {
             List<Point> points = new List<Point>() { triangle.a, triangle.b, triangle.c };
             Polygon polygon = new Polygon(points);
-            
+
             DrawFilledPolygon(spriteBatch, effect, polygon, color);
         }
-        
-        public static void DrawCircle(SpriteBatch spriteBatch, Circle circle, 
+
+        public static void DrawCircle(SpriteBatch spriteBatch, Circle circle,
             Color color, float thickness, float layer = 1.0f)
         {
             DrawLines(spriteBatch, circle, color, thickness, layer);
         }
-        
+
         private static void DrawFilledCircle(SpriteBatch spriteBatch, Effect effect, Circle circle, Color color)
         {
             Polygon polygon = new Polygon(circle.points.ToList());
-            
+
             DrawFilledPolygon(spriteBatch, effect, polygon, color);
         }
-        
-        public static void DrawPolygon(SpriteBatch spriteBatch, Polygon polygon, 
+
+        public static void DrawPolygon(SpriteBatch spriteBatch, Polygon polygon,
             Color color, float thickness, float layer = 1.0f)
         {
             DrawLines(spriteBatch, polygon, color, thickness, layer);
         }
-        
+
         private static void DrawFilledPolygon(SpriteBatch spriteBatch, Effect effect, Polygon polygon, Color color)
         {
             VertexPositionColor[] vertices = new VertexPositionColor[polygon.points.Count];
@@ -108,7 +108,7 @@ namespace Map2D.graphics.shapes
                 pass.Apply();
                 spriteBatch.GraphicsDevice.DrawUserPrimitives(
                     PrimitiveType.TriangleList, vertices, 0, 1);
-                
+
                 // TODO: Fix polygon drawing
             }
         }

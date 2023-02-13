@@ -1,14 +1,13 @@
 ﻿using System;
-using Map2D.core;
 
-namespace Map2D
+namespace Sandbox
 {
 	public static class Program
 	{
 		[STAThread]
 		static void Main()
 		{
-			Map2dGame game = new Map2dGame();
+			TestGame game = new TestGame();
 			game.Run();
 		}
 	}
